@@ -12,7 +12,7 @@ public class Suspension : MonoBehaviour
     public float frequency;
     public float dampingRatio;
 
-    public float wheelMass;
+    float wheelMass;
 
     public void Init()
     {

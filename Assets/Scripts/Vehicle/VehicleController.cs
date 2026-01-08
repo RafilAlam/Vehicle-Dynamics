@@ -33,7 +33,7 @@ public class VehicleController : MonoBehaviour
 
             Vector3 upForce = Vector3.zero;
             suspensionController.Step(mount, wheel, ref upForce);
-            rb.AddForceAtPosition(upForce, mount.position);
+            rb.AddForceAtPosition(upForce, wheel._wheelTransform.position);
         }
     }
 
