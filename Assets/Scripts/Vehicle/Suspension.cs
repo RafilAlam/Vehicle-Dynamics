@@ -45,5 +45,6 @@ public class Suspension : MonoBehaviour
             wheel._velocity += (springForce / wheelMass) * Time.deltaTime;
             wheel._displacement += wheel._velocity * Time.deltaTime;
         }
+        wheel._displacement = Mathf.Clamp(wheel._displacement, minLength, restLength + maxExtension);
     }
 }

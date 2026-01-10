@@ -1194,11 +1194,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Suspension
   vehicleMass: 1
-  restLength: 1
+  restLength: 0.5
   maxExtension: 0.2
-  minLength: 0.1
-  frequency: 2
-  dampingRatio: 0.4
+  minLength: 0.2
+  frequency: 3
+  dampingRatio: 0.5
 --- !u!114 &1403963770
 MonoBehaviour:
   m_ObjectHideFlags: 0
