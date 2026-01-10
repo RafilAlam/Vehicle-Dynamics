@@ -1,17 +1,23 @@
-using System;
+using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
 
 public class Wheel
 {
     public Transform _wheelTransform;
+    public Vector3 _contactPosition;
+    public bool _grounded;
+    public float _frictionCoeff;
+    public float _load;
     public float _displacement = 0;
     public float _velocity = 0;
+    public float _angularVelocity = 0;
     public float _wheelRadius = 0;
 
-    public Wheel(Transform wheeltransform, float wheelradius)
+    public Wheel(Transform wheeltransform, float wheelradius, float frictionCoeff)
     {
         _wheelTransform = wheeltransform;
         _wheelRadius = wheelradius;
+        _frictionCoeff = frictionCoeff;
     }
 }
 
@@ -22,7 +28,9 @@ public class Wheels : MonoBehaviour
     public Transform wheelsContainer;
 
     [Header("Properties")]
-    public float wheelRadius;
+    public float Radius;
+    public float frictionCoeff;
+    public float angularVelocity;
 
     public Transform[] _mounts = new Transform[4];
     public Wheel[] _wheels = new Wheel[4];
@@ -39,12 +47,17 @@ public class Wheels : MonoBehaviour
         i = 0;
         foreach (Transform wheel in wheelsContainer)
         {
-            _wheels[i] = new Wheel(wheel, 0.5f);
+            _wheels[i] = new Wheel(wheel, 0.5f, frictionCoeff);
             i++;
         }
     }
 
-    public void Step(Transform mount, Wheel wheel)
+    public void Step(Wheel wheel)
+    {
+        wheel._angularVelocity = angularVelocity;
+    }
+
+    public void VisualStep(Transform mount, Wheel wheel)
     {
         wheel._wheelTransform.position = mount.position - transform.up * wheel._displacement;
     }

@@ -22,18 +22,20 @@ public class Suspension : MonoBehaviour
     public void Step(Transform mount, Wheel wheel, ref Vector3 UpForce)
     {
         wheelMass = vehicleMass / 4;
-        if (Physics.SphereCast(mount.position, wheel._wheelRadius, -transform.up, out RaycastHit hitInfo, restLength+maxExtension))
+        wheel._grounded = Physics.SphereCast(mount.position, wheel._wheelRadius, -transform.up, out RaycastHit hitInfo, restLength + maxExtension);
+        if (wheel._grounded)
         {
             float naturalFrequency = 2 * Mathf.PI * frequency;
             float stiffness = wheelMass * naturalFrequency * naturalFrequency;
             float damping = 2 * wheelMass * dampingRatio * naturalFrequency;
             float compression = hitInfo.distance - restLength;
-            float springForce = -stiffness * compression - damping * wheel._velocity;
+            wheel._load = -stiffness * compression - damping * wheel._velocity;
 
             wheel._velocity = (hitInfo.distance - wheel._displacement)/Time.deltaTime;
             wheel._displacement = hitInfo.distance;
+            wheel._contactPosition = hitInfo.point;
 
-            UpForce = transform.up * Mathf.Max(0, springForce);
+            UpForce = hitInfo.normal * Mathf.Max(0, wheel._load);
         } else
         {
             float naturalFrequency = 2 * Mathf.PI * frequency;
