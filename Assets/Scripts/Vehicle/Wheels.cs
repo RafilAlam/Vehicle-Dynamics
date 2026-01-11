@@ -54,11 +54,15 @@ public class Wheels : MonoBehaviour
 
     public void Step(Wheel wheel)
     {
+        Debug.DrawRay(wheel._wheelTransform.position, wheel._wheelTransform.forward * 1f);
+        Debug.DrawRay(wheel._wheelTransform.position, wheel._wheelTransform.right * 1f);
         wheel._angularVelocity = angularVelocity;
     }
 
     public void VisualStep(Transform mount, Wheel wheel)
     {
-        wheel._wheelTransform.position = mount.position - transform.up * wheel._displacement;
+        Transform wheelTransform = wheel._wheelTransform;
+        wheelTransform.position = mount.position - transform.up * wheel._displacement;
+        wheelTransform.Rotate(wheel._angularVelocity * Mathf.Rad2Deg * Time.deltaTime, 0f, 0f, Space.Self);
     }
 }

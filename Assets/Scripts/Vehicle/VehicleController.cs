@@ -66,12 +66,12 @@ public class VehicleController : MonoBehaviour
         {
             Transform mount = wheels._mounts[i];
             Wheel wheel = wheels._wheels[i];
-            Gizmos.DrawRay(wheel._wheelTransform.position, mount.forward * 1f);
-            Gizmos.DrawRay(wheel._wheelTransform.position, mount.right * 1f);
 
             Gizmos.DrawRay(mount.position, -transform.up * 0.7f);
             // Sphere represents rest position for wheel
             Gizmos.DrawSphere(mount.position + -transform.up * 0.5f, 0.1f);
+
+
         }
     }
 }
