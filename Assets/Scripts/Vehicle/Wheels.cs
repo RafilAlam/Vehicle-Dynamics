@@ -4,6 +4,7 @@ using UnityEngine;
 public class Wheel
 {
     public Transform _wheelTransform;
+    public Bristle[] bristles;
     public Vector3 _contactPosition;
     public bool _grounded;
     public float _frictionCoeff;
