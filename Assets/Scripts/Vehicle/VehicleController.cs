@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class VehicleController : MonoBehaviour
@@ -6,7 +7,7 @@ public class VehicleController : MonoBehaviour
     Drivetrain drivetrain;
     Suspension suspension;
     Wheels wheels;
-    Brush tyres;
+    Pacejka tyres;
     Rigidbody rb;
 
     void Awake()
@@ -15,7 +16,7 @@ public class VehicleController : MonoBehaviour
         drivetrain = GetComponent<Drivetrain>();
         suspension = GetComponent<Suspension>();
         wheels = GetComponent<Wheels>();
-        tyres = GetComponent<Brush>();
+        tyres = GetComponent<Pacejka>();
         rb = GetComponent<Rigidbody>();
     }
 
@@ -23,9 +24,6 @@ public class VehicleController : MonoBehaviour
     {
         suspension.Init();
         wheels.Init();
-
-        foreach (Wheel wheel in wheels._wheels)
-            tyres.Init(wheel);
     }
 
     void Update()
@@ -46,12 +44,10 @@ public class VehicleController : MonoBehaviour
             Vector3 tyreForce = Vector3.zero;
             wheels.Step(wheel);
             suspension.Step(mount, wheel, ref upForce);
-            tyres.Step(rb, mount, wheel, ref tyreForce);
-            rb.AddForceAtPosition(upForce, wheel._wheelTransform.position);
+            Debug.Log(upForce.magnitude);
             if (wheel._grounded)
             {
-                rb.AddForceAtPosition(tyreForce, wheel._contactPosition);
-                //Debug.DrawRay(wheel._contactPosition, tyreForce);
+                rb.AddForceAtPosition(upForce, wheel._hitInfo.point, ForceMode.Force);
             }
         }
     }

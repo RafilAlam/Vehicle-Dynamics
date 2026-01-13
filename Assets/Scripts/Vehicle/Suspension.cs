@@ -33,7 +33,7 @@ public class Suspension : MonoBehaviour
 
             wheel._velocity = (hitInfo.distance - wheel._displacement)/Time.deltaTime;
             wheel._displacement = hitInfo.distance;
-            wheel._contactPosition = hitInfo.point;
+            wheel._hitInfo = hitInfo;
 
             UpForce = hitInfo.normal * Mathf.Max(0, wheel._load);
         } else

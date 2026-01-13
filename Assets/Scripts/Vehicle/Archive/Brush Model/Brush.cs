@@ -1,5 +1,4 @@
-using Unity.VisualScripting;
-using UnityEngine;
+/*using UnityEngine;
 
 public class Bristle
 {
@@ -59,9 +58,9 @@ public class Brush : MonoBehaviour
                 {
                     bristle._hitInfo = bristleHitInfo;
                     Vector3 frameDisplacement = bristle._lastPosition - bristleHitInfo.point;
-                    Vector3 velocity = frameDisplacement / Time.deltaTime;
-                    bristle._displacement += frameDisplacement;
-                    bristle._displacement.y = 0;
+                    Vector3 tangentialDisplacement = frameDisplacement - Vector3.Dot(frameDisplacement, bristleHitInfo.normal) * bristleHitInfo.normal;
+                    Vector3 velocity = tangentialDisplacement / Time.deltaTime;
+                    bristle._displacement += tangentialDisplacement;
                     bristle._lastPosition = bristleHitInfo.point;
 
                     Debug.DrawLine(bristleHitInfo.point, bristleHitInfo.point + bristle._displacement, Color.orange);
@@ -81,4 +80,4 @@ public class Brush : MonoBehaviour
         if (netForce.magnitude > maxForce)
             netForce = netForce.normalized * maxForce;
     }
-}
+}*/

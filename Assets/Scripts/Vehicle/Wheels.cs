@@ -1,11 +1,9 @@
-using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
 
 public class Wheel
 {
     public Transform _wheelTransform;
-    public Bristle[] bristles;
-    public Vector3 _contactPosition;
+    public RaycastHit _hitInfo;
     public bool _grounded;
     public float _frictionCoeff;
     public float _load;
@@ -48,7 +46,7 @@ public class Wheels : MonoBehaviour
         i = 0;
         foreach (Transform wheel in wheelsContainer)
         {
-            _wheels[i] = new Wheel(wheel, 0.5f, frictionCoeff);
+            _wheels[i] = new Wheel(wheel, Radius, frictionCoeff);
             i++;
         }
     }
